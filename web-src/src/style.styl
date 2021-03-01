@@ -1,0 +1,248 @@
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans');
+
+@font-face
+  font-family: 'Goldfish'
+  src: url('../assets/volter_goldfish.ttf')
+
+html 
+  font-family: 'Noto Sans', Arial, sans-serif
+
+body
+  --foreground-color: #fff
+  --background-color: #13171d
+  --border-color: #fff8
+  margin: 0
+  background-color: var(--background-color)
+  color: var(--foreground-color)
+  fill: var(--foreground-color)
+  min-height: 100vh
+
+pixel-border()
+  --border-color: #fffa
+  --border-top-color: var(--border-color)
+  --border-right-color: var(--border-color)
+  --border-bottom-color: var(--border-color)
+  --border-left-color: var(--border-color)
+  --border-width: 5px
+  --background-color: transparent
+  position: relative
+
+  &::before
+    content: ''
+    position: absolute
+    left: var(--border-width)
+    right: var(--border-width)
+    top: 0
+    bottom: 0
+    border-top: var(--border-width) solid var(--border-top-color)
+    border-bottom: var(--border-width) solid var(--border-bottom-color)
+    pointer-events: none
+    background-color: var(--background-color)
+    z-index: -1
+
+  &::after
+    content: ''
+    position: absolute
+    left: 0
+    right: 0
+    top: var(--border-width)
+    bottom: var(--border-width)
+    border-left: var(--border-width) solid var(--border-left-color)
+    border-right: var(--border-width) solid var(--border-right-color)
+    pointer-events: none
+    z-index: -1
+
+.border-box
+  pixel-border()
+  padding: 8px
+
+.pixel-text
+  font-family: 'Goldfish'
+  font-size: 14px
+
+select
+  background-color: var(--background-color)
+  border: 1px solid var(--border-color)
+  color: inherit
+  font-size: inherit
+  padding: 2px
+
+button
+  pixel-border()
+  display: inline-block
+  padding: 14px 16px
+  font-size: inherit
+  border: none
+  background-color: transparent
+  --background-color: transparent
+  color: #fff
+  text-shadow: 2px 2px 0px #000
+  cursor: pointer
+  text-transform: uppercase
+  font-family: 'Goldfish'
+  font-size: 15px
+
+button:hover:not([disabled])
+  --border-color: #fff
+  --background-color: #fff
+  color: #000
+  text-shadow: none
+
+button:active:not([disabled])
+  --border-color: #fff
+  --background-color: #0008
+  color: #fff
+  text-shadow: 2px 2px 0px #000
+
+button[disabled]
+  color: #fff8
+  cursor: default
+
+input[type='checkbox'],
+label
+  cursor: pointer
+
+.hidden
+  display: none
+
+.row
+  display: flex
+  align-items: center
+
+.column
+  display: flex
+  align-items: center
+  flex-direction: column
+
+.section
+  padding: 0 120px
+
+.section-body
+  display: flex
+  align-items: center
+
+.section-panel
+  flex: 1
+  display: flex
+  align-items: center
+  justify-content: center
+
+.convert-skin-column
+  margin: 0 24px 0 8px
+
+.convert-skin-text
+  margin: 4px 12px
+
+.arrow-right
+  width: 100%
+  height: 10px
+  background-color: var(--foreground-color)
+  position: relative
+
+.arrow-right::after
+  content: ''
+  border-left: 16px solid var(--foreground-color)
+  border-top: 16px solid transparent
+  border-bottom: 16px solid transparent
+  position: absolute
+  left: 100%
+  top: 50%
+  transform: translateY(-50%)
+
+.original-skin-slot,
+.converted-skin-slot
+  pixel-border()
+  padding: 8px
+  margin: 5px 5px 13px 5px
+
+.transparent-image-wrapper
+  background-image: url('../assets/transparent.png')
+  background-size: auto
+  background-repeat: repeat
+  width: 256px
+  height: 256px
+
+#upload-panel
+  flex-direction: column
+
+#upload-icon
+  pixel-border()
+  --border-width: 20px
+  --border-color: #fff5
+  --border-top-color: transparent
+  --border-bottom-color: transparent
+  --background-color: #fff5
+  height: 104px
+  width: 104px
+  display: flex
+  align-items: center
+  justify-content: center
+  cursor: pointer
+  
+  svg
+    width: 64px
+    height: 64px
+
+#converter-panel
+  flex: 2
+
+#input-skin
+  width: 100%
+  -ms-interpolation-mode: nearest-neighbor
+  image-rendering: -moz-crisp-edges
+  image-rendering: -webkit-optimize-contrast
+  image-rendering: pixelated
+
+#output-skin
+  width: 128px
+  height: 128px
+
+#portrait-preview
+  width: 32px
+  height: 32px
+  -ms-interpolation-mode: nearest-neighbor
+  image-rendering: -moz-crisp-edges
+  image-rendering: -webkit-optimize-contrast
+  image-rendering: pixelated
+  margin-right: 8px
+  border: 1px solid var(--border-color)
+
+#mod-section
+  background-color: #0008
+
+#mod-section .section-panel
+  min-height: 580px
+
+#menu-bg
+  position: absolute
+  margin-left: 90px
+  pointer-events: none
+  -webkit-mask-image: url('../assets/bg_mask.png')
+  mask-image: url('../assets/bg_mask.png')
+  filter: shadow(0px, 0px, 4px, #000)
+
+#menu-preview-model
+  background-image: url('../assets/player_shadow.png')
+  background-position: center 36px
+  background-repeat: no-repeat
+  background-size: 100%
+  z-index: 1
+
+#mod-section .section-panel:last-child>*
+  margin-left: -300px
+  z-index: 2
+
+#download-mod-button
+  --border-top-color: #769fff
+  --border-left-color: #769fff
+  --border-bottom-color: #3656a1
+  --border-right-color: #3656a1
+  --background-color: #58f
+  
+  &:hover
+    --border-top-color: #fff
+    --border-left-color: #fff
+    --border-bottom-color: #fff
+    --border-right-color: #fff
+    color: #fff
+    text-shadow: 2px 2px 0px #000

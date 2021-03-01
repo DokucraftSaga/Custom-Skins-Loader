@@ -1,0 +1,17 @@
+UE4Project/.vs/*
+UE4Project/Binaries/Win64/*.pdb
+UE4Project/Build/*
+UE4Project/Intermediate/*
+UE4Project/Saved/*
+UE4Project/Content/Collections
+UE4Project/Content/Developers
+
+Dungeons/**/*.uasset
+Dungeons/**/*.ubulk
+Dungeons/**/*.uexp
+Dungeons/**/*.umap
+Dungeons/**/*.ufont
+
+web-src/node_modules/*
+
+Custom-Skins-Loader.pak

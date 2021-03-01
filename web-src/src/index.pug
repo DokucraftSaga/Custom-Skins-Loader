@@ -1,0 +1,132 @@
+doctype html
+html
+  head
+    title Java To Dungeons Skin Converter
+  body
+    input#file-input.hidden(type='file')
+    canvas#mod-preview-skin.hidden(width=64, height=64)
+    canvas#output-skin.hidden(width=64, height=64)
+    .section#mod-section
+      .section-body
+        .section-panel
+          video#menu-bg(src=require('../assets/menu_bg.mp4').default, autoplay, mute, loop)
+          #menu-preview-model
+        .section-panel.column
+          h2 Custom Skins Loader v1.0
+          a(href='http://dokucraft.co.uk/'): button#download-mod-button Download Mod
+          .download-stat 1337 downloads
+          .download-stat Updated Mar 2, 2021
+    .section
+      //-.section-title Convert skin
+      .section-body
+        #upload-panel.section-panel
+          #upload-icon: include ../assets/upload.svg
+          p Drag and drop skin file to upload
+          button#upload-button Select file
+        #converter-panel.section-panel.hidden
+          .row
+            .column
+              .original-skin-slot
+                .transparent-image-wrapper
+                  img#input-skin.hidden
+              select#skin-format
+                option(value='classic', selected) Classic Java skin
+                option(value='slim') Slim Java skin
+                option(value='legacy', disabled) Legacy Java skin
+              .row
+                input#include-animated-face(type='checkbox')
+                label(for='include-animated-face') Has animated face
+            .convert-skin-column.column
+              .convert-skin-text
+                | Conversion
+              .arrow-right
+            .column
+              .converted-skin-slot
+                .row
+                  canvas#portrait-preview(width=8, height=8)
+                  span.pixel-text Character Portrait
+                #model-viewer
+              span Dungeons skin
+              //-select#skin-name(title='The skin texture you want to replace')
+                option(value='Alex', selected) Alex
+                option(value='Annika') Annika
+                //-option(value='Annika_S') Annika (S)
+                option(value='Archeologist') Archeologist
+                //-option(value='Archeologist_S') Archeologist (S)
+                option(value='Baako') Baako
+                //-option(value='Baako_S') Baako (S)
+                option(value='Bediako') Bediako
+                //-option(value='Bediako_S') Bediako (S)
+                option(value='Christina') Christina
+                //-option(value='Christina_S') Christina (S)
+                option(value='Dani') Dani
+                //-option(value='Dani_S') Dani (S)
+                option(value='Darian') Darian
+                //-option(value='Darian_S') Darian (S)
+                option(value='Elaine') Elaine
+                //-option(value='Elaine_S') Elaine (S)
+                option(value='Emerald') Emerald
+                //-option(value='Emerald_S') Emerald (S)
+                option(value='End_Rogue') End Rogue
+                //-option(value='End_Rogue_S') End Rogue (S)
+                option(value='Eshe') Eshe
+                option(value='Esperanza') Esperanza
+                //-option(value='Esperanza_S') Esperanza (S)
+                option(value='Explorer') Explorer
+                //-option(value='Explorer_S') Explorer (S)
+                option(value='Frosty') Frosty
+                //-option(value='Frosty_S') Frosty (S)
+                option(value='Fuego') Fuego
+                //-option(value='Fuego_S') Fuego (S)
+                option(value='Greta') Greta
+                option(value='Hal') Hal
+                //-option(value='Hal_S') Hal (S)
+                option(value='Hedwig') Hedwig
+                //-option(value='Hedwig_S') Hedwig (S)
+                option(value='Hex') Hex
+                //-option(value='Hex_S') Hex (S)
+                option(value='Igor') Igor
+                //-option(value='Igor_S') Igor (S)
+                option(value='Jade') Jade
+                //-option(value='Jade_S') Jade (S)
+                option(value='Llama') Llama
+                option(value='Loge') Loge
+                //-option(value='Loge_S') Loge (S)
+                option(value='Mayeso') Mayeso
+                option(value='Morris') Morris
+                option(value='Neo') Neo
+                //-option(value='Neo_S') Neo (S)
+                option(value='Nether_Warrior') Nether Warrior
+                //-option(value='Nether_Warrior_S') Nether Warrior (S)
+                option(value='Nuru') Nuru
+                //-option(value='Nuru_S') Nuru (S)
+                option(value='Pake') Pake
+                //-option(value='Pake_S') Pake (S)
+                option(value='Qamar') Qamar
+                option(value='Sam') Sam
+                //-option(value='Sam_S') Sam (S)
+                option(value='Sergey') Sergey
+                //-option(value='Sergey_S') Sergey (S)
+                option(value='Shikoba') Shikoba
+                //-option(value='Shikoba_S') Shikoba (S)
+                option(value='Steve') Steve
+                //-option(value='Steve_S') Steve (S)
+                option(value='Sven') Sven
+                //-option(value='Sven_S') Sven (S)
+                option(value='Tim') Tim
+                option(value='Valorie') Valorie
+                //-option(value='Valorie_S') Valorie (S)
+                option(value='Violet') Violet
+                //-option(value='Violet_S') Violet (S)
+                option(value='Wargen') Wargen
+                //-option(value='Wargen_S') Wargen (S)
+                option(value='Winter_Warrior') Winter Warrior
+                //-option(value='Winter_Warrior_S') Winter Warrior (S)
+                option(value='Zola') Zola
+                //- option(value='Hammer_Cape') Hammer Cape
+                //- option(value='Hammer_Cape_S') Hammer Cape (S)
+                //- option(value='Iron_Golem_Cape') Iron Golem Cape
+                //- option(value='Iron_Golem_Cape_S') Iron Golem Cape (S)
+                //- option(value='Monstrosity_Golden_Cape') Monstrosity Golden Cape
+                //- option(value='Sinister_Cape') Sinister Cape
+              button#download-skin-button(disabled) Download skin
