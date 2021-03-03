@@ -3,12 +3,17 @@ require('./FileSaver.min.js')
 require('./mod_preview_model.js')
 require('./player_model.js')
 
-previewSkins = [
+const previewSkins = [
   require('../assets/skins/0.png').default,
   require('../assets/skins/1.png').default,
   require('../assets/skins/2.png').default
 ]
-currentPreviewSkin = null
+let currentPreviewSkin = null
+
+const capeTemplates = [
+  require('../assets/cape_template_1.png').default,
+  require('../assets/cape_template_2.png').default
+]
 
 const canvas = document.querySelector('#output-skin')
 const ctx = canvas.getContext('2d')
@@ -18,6 +23,10 @@ const inputSkin = document.querySelector('#input-skin')
 const skinFormat = document.querySelector('#skin-format')
 const includeAnimatedFace = document.querySelector('#include-animated-face')
 const downloadSkinButton = document.querySelector('#download-skin-button')
+const inputCape = document.querySelector('#input-cape')
+const capeTemplate = document.querySelector('#cape-template')
+
+let converterMode = 'skin'
 
 const translations = {
   face: [
@@ -217,6 +226,12 @@ function updatePortrait(m) {
 }
 
 function convertSkin() {
+  if (inputSkin.naturalWidth > 64) {
+    document.querySelector('.warning-hd-required').classList.remove('hidden')
+  } else {
+    document.querySelector('.warning-hd-required').classList.add('hidden')
+  }
+
   const m = inputSkin.naturalWidth / 64
   canvas.width = inputSkin.naturalWidth
   canvas.height = inputSkin.naturalWidth
@@ -252,7 +267,7 @@ function drawNextModPreviewSkin() {
 drawNextModPreviewSkin()
 
 inputSkin.addEventListener('load', evt => {
-  inputSkin.classList.remove('hidden')
+  document.querySelector('#converter-panel').classList.remove('hidden')
 
   // Automatically set format for legacy skins
   if (inputSkin.naturalHeight != inputSkin.naturalWidth) {
@@ -268,12 +283,22 @@ inputSkin.addEventListener('load', evt => {
   convertSkin()
 })
 
+inputCape.addEventListener('load', evt => {
+  inputCape.classList.remove('hidden')
+
+  //convertSkin()
+})
+
 document.body.addEventListener('drop', evt => {
   evt.preventDefault()
 
   if (evt.dataTransfer.items[0].kind === 'file') {
     const file = evt.dataTransfer.items[0].getAsFile()
-    inputSkin.src = URL.createObjectURL(file)
+    if (converterMode == 'skin') {
+      inputSkin.src = URL.createObjectURL(file)
+    } else {
+      inputCape.src = URL.createObjectURL(file)
+    }
   }
 })
 document.body.addEventListener('dragover', evt => {
@@ -292,7 +317,11 @@ includeAnimatedFace.addEventListener('change', evt => {
 })
 
 document.querySelector('#file-input').addEventListener('change', evt => {
-  inputSkin.src = URL.createObjectURL(evt.target.files[0])
+  if (converterMode == 'skin') {
+    inputSkin.src = URL.createObjectURL(evt.target.files[0])
+  } else {
+    inputCape.src = URL.createObjectURL(evt.target.files[0])
+  }
   evt.target.value = null
 })
 
@@ -306,3 +335,83 @@ document.querySelector('#upload-button').addEventListener('click', evt => {
 document.querySelector('#upload-icon').addEventListener('click', evt => {
   document.querySelector('#file-input').click()
 })
+
+document.querySelector('#cape-template-scale').addEventListener('input', evt => {
+  capeTemplate.style.width = (20 + evt.target.value / 12500) + '%'
+  capeTemplate.style.top = Math.max(0, Math.min(capeTemplate.parentElement.clientHeight - capeTemplate.clientHeight, capeTemplate.offsetTop)) + 'px'
+  capeTemplate.style.left = Math.max(0, Math.min(capeTemplate.parentElement.clientWidth - capeTemplate.clientWidth, capeTemplate.offsetLeft)) + 'px'
+})
+
+function dragElement(el) {
+  let posX1 = 0, posY1 = 0, posX2 = 0, posY2 = 0;
+  el.onmousedown = dragMouseDown
+
+  function dragMouseDown(evt) {
+    evt = evt || window.event
+    evt.preventDefault()
+    posX2 = evt.clientX
+    posY2 = evt.clientY
+    document.onmouseup = closeDragElement
+    document.onmousemove = elementDrag
+  }
+
+  function elementDrag(evt) {
+    evt = evt || window.event
+    evt.preventDefault()
+    posX1 = posX2 - evt.clientX
+    posY1 = posY2 - evt.clientY
+    posX2 = evt.clientX
+    posY2 = evt.clientY
+    el.style.top = Math.max(0, Math.min(el.parentElement.clientHeight - el.clientHeight, el.offsetTop - posY1)) + 'px'
+    el.style.left = Math.max(0, Math.min(el.parentElement.clientWidth - el.clientWidth, el.offsetLeft - posX1)) + 'px'
+  }
+
+  function closeDragElement() {
+    document.onmouseup = null
+    document.onmousemove = null
+  }
+}
+
+dragElement(capeTemplate)
+
+capeTemplate.addEventListener('load', evt => {
+  capeTemplate.style.top = Math.max(0, Math.min(capeTemplate.parentElement.clientHeight - capeTemplate.clientHeight, capeTemplate.offsetTop)) + 'px'
+  capeTemplate.style.left = Math.max(0, Math.min(capeTemplate.parentElement.clientWidth - capeTemplate.clientWidth, capeTemplate.offsetLeft)) + 'px'
+})
+
+document.querySelector('#cape-template-number').addEventListener('change', evt => {
+  capeTemplate.src = capeTemplates[evt.target.value]
+})
+
+
+
+
+
+
+// Downloads
+
+;(async () => {
+
+  try {
+    const latestRelease = await fetch('https://api.github.com/repos/DokucraftSaga/Custom-Skins-Loader/releases/latest').then(e => e.json())
+    document.querySelector('#mod-version-number').textContent = latestRelease.tag_name
+    document.querySelector('#mod-download-count').textContent = latestRelease.assets.reduce((a, e) => a + e.download_count, 0) + ' downloads'
+
+    const months = [ 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec' ]
+    const d = new Date(latestRelease.assets[0].updated_at)
+    document.querySelector('#mod-update-date').textContent = 'Updated ' + months[d.getMonth()] + ' ' + d.getDate() + ', ' + d.getFullYear()
+
+    for (let asset of latestRelease.assets) {
+      if (asset.name == 'Custom-Skins-Loader.pak') {
+        document.querySelector('#download-mod-button').href = asset.browser_download_url
+      } else {
+        document.querySelector('#download-hd-mod-button').href = asset.browser_download_url
+      }
+    }
+
+  } catch (ex) {
+    console.error(ex)
+    //TODO: Failed to get latest release. Update page to tell the user something went wrong.
+  }
+
+})()

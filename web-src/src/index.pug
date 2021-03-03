@@ -1,34 +1,57 @@
 doctype html
 html
   head
-    title Java To Dungeons Skin Converter
+    title Custom Skins Loader Mod
   body
     input#file-input.hidden(type='file')
     canvas#mod-preview-skin.hidden(width=64, height=64)
     canvas#output-skin.hidden(width=64, height=64)
-    .section#mod-section
+    #mod-section.section
       .section-body
         .section-panel
           video#menu-bg(src=require('../assets/menu_bg.mp4').default, autoplay, mute, loop)
           #menu-preview-model
         .section-panel.column
-          h2 Custom Skins Loader v1.0
-          a(href='http://dokucraft.co.uk/'): button#download-mod-button Download Mod
-          .download-stat 1337 downloads
-          .download-stat Updated Mar 2, 2021
-    .section
-      //-.section-title Convert skin
+          h2
+            | Custom Skins Loader 
+            span#mod-version-number
+          .column
+            h3.mod-edition-title Standard Edition
+            sub: i Support for normal 64x64 skins, better for performance
+            a#download-mod-button: button Download Mod
+          .column
+            h3.mod-edition-title High Definition Edition
+            sub: i Support for higher resolution skins, up to 256x256
+            a#download-hd-mod-button: button Download Mod
+          br
+          #mod-download-count
+          #mod-update-date
+    #converter-section.section
+      h2.section-title Convert skin
       .section-body
         #upload-panel.section-panel
           #upload-icon: include ../assets/upload.svg
-          p Drag and drop skin file to upload
+          p Drag and drop skin file to convert
           button#upload-button Select file
         #converter-panel.section-panel.hidden
-          .row
+          #cape-converter.row.hidden
+            .column
+              .original-cape-slot
+                .transparent-image-wrapper
+                  img#input-cape.hidden
+                  img#cape-template(src=require('../assets/cape_template_1.png').default)
+              .row
+                span Scale:
+                input#cape-template-scale(type='range', min=0, max=1000000, value=797101)
+              select#cape-template-number
+                option(value=0, selected) Cape Type 1
+                option(value=1) Cape Type 2
+          #skin-converter.row
             .column
               .original-skin-slot
                 .transparent-image-wrapper
-                  img#input-skin.hidden
+                  img#input-skin
+              .warning-hd-required.hidden <b>High Definition Edition</b> is required to use this skin
               select#skin-format
                 option(value='classic', selected) Classic Java skin
                 option(value='slim') Slim Java skin
@@ -37,8 +60,6 @@ html
                 input#include-animated-face(type='checkbox')
                 label(for='include-animated-face') Has animated face
             .convert-skin-column.column
-              .convert-skin-text
-                | Conversion
               .arrow-right
             .column
               .converted-skin-slot

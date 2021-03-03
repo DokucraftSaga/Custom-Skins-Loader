@@ -59,6 +59,8 @@ pixel-border()
 .pixel-text
   font-family: 'Goldfish'
   font-size: 14px
+  font-smooth: never
+  -webkit-font-smoothing : none
 
 select
   background-color: var(--background-color)
@@ -71,7 +73,6 @@ button
   pixel-border()
   display: inline-block
   padding: 14px 16px
-  font-size: inherit
   border: none
   background-color: transparent
   --background-color: transparent
@@ -81,6 +82,8 @@ button
   text-transform: uppercase
   font-family: 'Goldfish'
   font-size: 15px
+  font-smooth: never
+  -webkit-font-smoothing : none
 
 button:hover:not([disabled])
   --border-color: #fff
@@ -103,7 +106,7 @@ label
   cursor: pointer
 
 .hidden
-  display: none
+  display: none !important
 
 .row
   display: flex
@@ -116,6 +119,9 @@ label
 
 .section
   padding: 0 120px
+
+.section-title
+  margin-bottom: 0px
 
 .section-body
   display: flex
@@ -161,6 +167,12 @@ label
   background-repeat: repeat
   width: 256px
   height: 256px
+
+.warning-hd-required
+  font-size: 0.7em
+  color: #fae030
+  max-width: 270px
+  margin: -8px 0px 8px 0px
 
 #upload-panel
   flex-direction: column
@@ -215,13 +227,14 @@ label
 
 #menu-bg
   position: absolute
-  margin-left: 90px
+  margin-left: 190px
   pointer-events: none
   -webkit-mask-image: url('../assets/bg_mask.png')
   mask-image: url('../assets/bg_mask.png')
   filter: shadow(0px, 0px, 4px, #000)
 
 #menu-preview-model
+  margin-left: 200px
   background-image: url('../assets/player_shadow.png')
   background-position: center 36px
   background-repeat: no-repeat
@@ -232,12 +245,17 @@ label
   margin-left: -300px
   z-index: 2
 
-#download-mod-button
+.mod-edition-title
+  margin-bottom: 4px
+
+#download-mod-button>button,
+#download-hd-mod-button>button
   --border-top-color: #769fff
   --border-left-color: #769fff
   --border-bottom-color: #3656a1
   --border-right-color: #3656a1
   --background-color: #58f
+  margin-top: 8px
   
   &:hover
     --border-top-color: #fff
@@ -246,3 +264,19 @@ label
     --border-right-color: #fff
     color: #fff
     text-shadow: 2px 2px 0px #000
+
+#converter-section>.section-body
+  min-height: 500px
+
+#cape-converter .transparent-image-wrapper
+  width: 512px
+  height: 512px
+  position: relative
+
+#cape-template
+  position: absolute
+  -ms-interpolation-mode: nearest-neighbor
+  image-rendering: -moz-crisp-edges
+  image-rendering: -webkit-optimize-contrast
+  image-rendering: pixelated
+  width: 83.7681%

@@ -14,4 +14,4 @@ Dungeons/**/*.ufont
 
 web-src/node_modules/*
 
-Custom-Skins-Loader.pak
+*.pak
