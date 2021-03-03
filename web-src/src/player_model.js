@@ -46,7 +46,7 @@ function init() {
     skinning: true,
     alphaTest: 0.333
   })
-  loader.load( '../assets/player_model.glb', function ( gltf ) {
+  loader.load( require('../assets/player_model.glb').default, function ( gltf ) {
 
     scene.add( gltf.scene );
 

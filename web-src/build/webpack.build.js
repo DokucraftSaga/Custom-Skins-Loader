@@ -31,7 +31,7 @@ module.exports = merge(webpackBaseConfig, {
       //  use: 'base64-inline-loader?name=[name].[ext]'
       //},
       {
-        test: /\.(jpe?g|png|gif|svg|mp4|ogg|mp3|ttf)$/,
+        test: /\.(jpe?g|png|gif|svg|mp4|ogg|mp3|ttf|glb)$/,
         use: [{
           loader: 'file-loader',
           options: {
