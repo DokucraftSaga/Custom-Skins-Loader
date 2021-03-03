@@ -383,6 +383,13 @@ document.querySelector('#cape-template-number').addEventListener('change', evt =
   capeTemplate.src = capeTemplates[evt.target.value]
 })
 
+// Browsers sometimes silently fail to autoplay muted videos. This should fix it or at least print an error/warning if it fails.
+const menuBGVideo = document.querySelector('#menu-bg')
+menuBGVideo.oncanplaythrough = function() {
+  menuBGVideo.muted = true
+  menuBGVideo.play()
+}
+
 
 
 
