@@ -1,21 +1,27 @@
 @import url('https://fonts.googleapis.com/css?family=Noto+Sans');
 
-@font-face
-  font-family: 'Goldfish'
-  src: url('../assets/volter_goldfish.ttf')
-
 html 
   font-family: 'Noto Sans', Arial, sans-serif
 
 body
   --foreground-color: #fff
-  --background-color: #13171d
+  --background-color: #121110
   --border-color: #fff8
   margin: 0
   background-color: var(--background-color)
+  background-image: url('../assets/block_bg.png')
+  background-repeat: no-repeat
+  background-size: 1920px 1080px
+  background-position center 580px
   color: var(--foreground-color)
   fill: var(--foreground-color)
   min-height: 100vh
+
+.fancy-border
+  border-width: 28px
+  border-style: solid
+  border-image: url('../assets/fancy_border.png') stretch
+  border-image-slice: 28
 
 pixel-border()
   --border-color: #fffa
@@ -56,12 +62,6 @@ pixel-border()
   pixel-border()
   padding: 8px
 
-.pixel-text
-  font-family: 'Goldfish'
-  font-size: 14px
-  font-smooth: never
-  -webkit-font-smoothing : none
-
 select
   background-color: var(--background-color)
   border: 1px solid var(--border-color)
@@ -72,34 +72,28 @@ select
 button
   pixel-border()
   display: inline-block
-  padding: 14px 16px
+  padding: 12px 14px
   border: none
   background-color: transparent
   --background-color: transparent
-  color: #fff
-  text-shadow: 2px 2px 0px #000
   cursor: pointer
-  text-transform: uppercase
-  font-family: 'Goldfish'
-  font-size: 15px
-  font-smooth: never
-  -webkit-font-smoothing : none
+
+  &>img
+    margin-bottom: -1px
 
 button:hover:not([disabled])
   --border-color: #fff
   --background-color: #fff
-  color: #000
-  text-shadow: none
 
 button:active:not([disabled])
   --border-color: #fff
   --background-color: #0008
-  color: #fff
-  text-shadow: 2px 2px 0px #000
 
 button[disabled]
-  color: #fff8
   cursor: default
+
+  &>img
+    opacity: 0.5
 
 input[type='checkbox'],
 label
@@ -118,14 +112,37 @@ label
   flex-direction: column
 
 .section
+  position: relative
   padding: 0 120px
+  
+  &:last-of-type
+    padding-bottom: 60px
 
 .section-title
   margin-bottom: 0px
 
-.section-body
+.section-body:not(.no-flex)
   display: flex
   align-items: center
+
+.section-body.no-flex
+  padding-left: 20px
+  padding-right: 60px
+
+  h3
+    margin-left: -8px
+
+  p
+    color: #e5e8ef
+  
+  p + h3
+    margin-top: 36px
+  
+  a
+    color: #75b2ff
+
+    &:visited
+      color: #a070ff
 
 .section-panel
   flex: 1
@@ -210,6 +227,7 @@ label
   height: 128px
 
 #portrait-preview
+  position: absolute
   width: 32px
   height: 32px
   -ms-interpolation-mode: nearest-neighbor
@@ -225,21 +243,28 @@ label
 #mod-section .section-panel
   min-height: 580px
 
+#mod-title
+  margin-top: 4px
+
 #menu-bg
   position: absolute
-  margin-left: 190px
+  margin-left: 380px
   pointer-events: none
   -webkit-mask-image: url('../assets/bg_mask.png')
   mask-image: url('../assets/bg_mask.png')
-  filter: shadow(0px, 0px, 4px, #000)
 
 #menu-preview-model
   margin-left: 200px
+  padding: 36px 0px
   background-image: url('../assets/player_shadow.png')
-  background-position: center 36px
+  background-position: center 72px
   background-repeat: no-repeat
   background-size: 100%
   z-index: 1
+
+#menu-preview-model>canvas
+  width: 320px !important
+  height: 320px !important
 
 #mod-section .section-panel:last-child>*
   margin-left: -300px
@@ -250,11 +275,11 @@ label
 
 #download-mod-button>button,
 #download-hd-mod-button>button
-  --border-top-color: #769fff
-  --border-left-color: #769fff
-  --border-bottom-color: #3656a1
-  --border-right-color: #3656a1
-  --background-color: #58f
+  --border-top-color: #60cf73
+  --border-left-color: #377a44
+  --border-bottom-color: #23582e
+  --border-right-color: #377a44
+  --background-color: #418c50
   margin-top: 8px
   
   &:hover
@@ -280,3 +305,42 @@ label
   image-rendering: -webkit-optimize-contrast
   image-rendering: pixelated
   width: 83.7681%
+
+.mod-section-buttons-row
+  position: absolute
+  left: calc(156px + 25vw)
+  bottom: 16px
+  transform: translateX(-50%)
+
+.mod-section-button
+  pixel-border()
+  --border-color: #1b1b1c
+  --background-color: #1b1b1c
+  z-index: 1
+  padding: 8px 12px
+  cursor: pointer
+  font-weight: 700
+  letter-spacing: 1px
+  color: #fff !important
+  text-decoration: none
+
+  &:not(:first-child)
+    margin-left: 12px
+  
+  &:hover
+    --border-color: #29292a
+    --background-color: #29292a
+
+#model-viewer>canvas
+  width: 256px !important
+  height: 256px !important
+
+@media only screen and (max-width: 1440px)
+  .section
+    padding: 0 20px
+  
+  #mod-section .section-panel:last-child>*
+    margin-left: 0
+  
+  .mod-section-buttons-row
+    left: calc(106px + 25vw)

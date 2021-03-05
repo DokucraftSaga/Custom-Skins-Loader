@@ -2,37 +2,50 @@ doctype html
 html
   head
     title Custom Skins Loader Mod
+    meta(name='og:type', content='website')
+    meta(name='og:title', content='Custom Skins Loader Mod')
+    meta(name='og:description', content='A mod for Minecraft Dungeons that lets you use custom skins and capes.')
+    meta(name='og:image', content='https://dokucraft.co.uk/Custom-Skins-Loader/' + require('../assets/icon.png').default)
+    meta(name='theme-color', content='#e87927')
+    link(rel='icon', type='image/png', sizes='32x32', href=require('../assets/favicon-32x32.png').default)
+    link(rel='icon', type='image/png', sizes='16x16', href=require('../assets/favicon-16x16.png').default)
   body
     input#file-input.hidden(type='file')
     canvas#mod-preview-skin.hidden(width=64, height=64)
     canvas#output-skin.hidden(width=64, height=64)
     #mod-section.section
       .section-body
-        .section-panel
+        .section-panel.column
           video#menu-bg(src=require('../assets/menu_bg.mp4').default, autoplay, mute, loop)
           #menu-preview-model
-        .section-panel.column
-          h2
-            | Custom Skins Loader 
-            span#mod-version-number
-          .column
-            h3.mod-edition-title Standard Edition
-            sub: i Support for normal 64x64 skins, better for performance
-            a#download-mod-button: button Download Mod
-          .column
-            h3.mod-edition-title High Definition Edition
-            sub: i Support for higher resolution skins, up to 256x256
-            a#download-hd-mod-button: button Download Mod
-          br
-          #mod-download-count
-          #mod-update-date
+          .mod-section-buttons-row.row
+            .mod-section-button(onclick='document.querySelector("#installation-section").scrollIntoView({block:"start",behavior:"smooth"})') Installation
+            .mod-section-button(onclick='document.querySelector("#usage-section").scrollIntoView({block:"start",behavior:"smooth"})') How to use
+            a(href='https://discord.gg/9e9ytXtsM7').mod-section-button Discord
+            a(href='https://dokucraft.co.uk/').mod-section-button Dokucraft
+        .section-panel
+          .column.fancy-border
+            h2#mod-title
+              | Custom Skins Loader 
+              span#mod-version-number
+            .column
+              h3.mod-edition-title Standard Edition
+              sub: i Support for normal 64x64 skins, better for performance
+              a#download-mod-button: button: img(src=require('../assets/download_mod_text.png').default)
+            .column
+              h3.mod-edition-title High Definition Edition
+              sub: i Support for higher resolution skins, up to 256x256
+              a#download-hd-mod-button: button: img(src=require('../assets/download_mod_text.png').default)
+            br
+            #mod-download-count
+            #mod-update-date
     #converter-section.section
-      h2.section-title Convert skin
+      h2.section-title Skin Converter
       .section-body
         #upload-panel.section-panel
           #upload-icon: include ../assets/upload.svg
           p Drag and drop skin file to convert
-          button#upload-button Select file
+          button#upload-button: img(src=require('../assets/select_file_text.png').default)
         #converter-panel.section-panel.hidden
           #cape-converter.row.hidden
             .column
@@ -63,9 +76,7 @@ html
               .arrow-right
             .column
               .converted-skin-slot
-                .row
-                  canvas#portrait-preview(width=8, height=8)
-                  span.pixel-text Character Portrait
+                canvas#portrait-preview(width=8, height=8)
                 #model-viewer
               span Dungeons skin
               //-select#skin-name(title='The skin texture you want to replace')
@@ -150,4 +161,37 @@ html
                 //- option(value='Iron_Golem_Cape_S') Iron Golem Cape (S)
                 //- option(value='Monstrosity_Golden_Cape') Monstrosity Golden Cape
                 //- option(value='Sinister_Cape') Sinister Cape
-              button#download-skin-button(disabled) Download skin
+              button#download-skin-button(disabled): img(src=require('../assets/download_skin_text.png').default)
+    #installation-section.section
+      h2.section-title How to install Minecraft Dungeons mods
+      .section-body.no-flex
+        ol
+          li: p
+            | Follow 
+            a(href='https://dokucraft.co.uk/stash/?help=modding-dungeons') this guide
+            |  to set your game up for modding.
+          li: p Download the mod .pak file and place it in your ~mods folder.
+        p
+          | If you need any help, feel free to ask in the #dungeons channel in our 
+          a(href='https://discord.gg/9e9ytXtsM7') Discord server
+          | . Please mention what version of the game you have (Launcher or Windows Store) in your question, and be patient while waiting for a response.
+    br
+    #usage-section.section
+      h2.section-title How to use the mod
+      .section-body.no-flex
+        h3 Extract default skins
+        p Extracting the default skins is the easiest way to see what you can edit using this mod. To do it, simply press Shift + F5 while in-game with the mod installed. This will create a new "skins" folder in your ~mods folder with all of the default skin and cape textures the mod supports. Using this hotkey will not overwrite any files in the skins folder, so it is safe to use without backing up your skins.
+        h3 Loading skins
+        p The mod will automatically load the skins and capes you put in your skins folder when the game starts. You can also reload the skins at any time by pressing F5 in-game.
+        h3 Dungeons skin format
+        p Minecraft Dungeons uses a slightly different skin format compared to Java Edition. They may seem similar, but there are a lot of small changes to almost all parts of it. To convert a Java skin to work in Dungeons, use the Skin Converter above.
+        p Java Edition has 3 different skin formats: Classic, Slim, and the old legacy format. When you upload a skin, the converter is able to automatically detect legacy skins, but for the other two, you have to select the right one. The only difference between Classic and Slim skins is the width of the arms. Classic skins have 4x4 pixel arms, while Slim has 3x4. If you're not sure which one to select, just try both and see what looks best in the 3D preview of the skin.
+        h3 Skins with an animated face
+        p The player model in Minecraft Dungeons supports face animations, however the animated parts of the face uses a part of the texture that isn't normally used in Java Edition skins. Here is an image showing where those parts are in the top left corner of the texture:
+        img(src=require('../assets/animated_face_explanation.png').default)
+        p Note that the part where the face normally goes has no mouth and the eyelids are closed. This is because the blinking animations just shrinks the eyes so they're not visible over the eyelids anymore.
+        p To have two different eye colors or 2px tall eyes requires editing the player model, which is outside the scope of this mod. If your skin needs either of those, you could ignore the animated parts (leave them transparent) and just use the normal non-animated face like in Java Edition.
+        p When converting a skin with animated eyes, remember to tick the "Has animated eyes" checkbox! You can look at the 3D preview of the skin to see if the face animations are working correctly.
+        h3 SkinName_S textures
+        p In Minecraft Dungeons, skins can have an extra texture that controls how shiny different parts of the skin should be. This extra texture have the suffix _S in the filename. If you're not sure what to do with it, I recommend just replacing the one for your skin with a fully black image.
+        p These textures also control other things than just the shininess, but those are less noticeable on most skins. The red color channel is used for specularity (shininess), green is most likely used for metalness, and blue is used for emissive intensity. You can't change the emissive color using this mod, as that is controlled by the material itself and not a texture.

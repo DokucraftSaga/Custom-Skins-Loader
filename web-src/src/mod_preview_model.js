@@ -5,8 +5,8 @@ import { GLTFLoader } from './GLTFLoader.js';
 
 ;(() => {
 
-const rendererWidth = 320;
-const rendererHeight = 320;
+const rendererWidth = 640;
+const rendererHeight = 640;
 
 let mixer, camera, scene, renderer, clock;
 

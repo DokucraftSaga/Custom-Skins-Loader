@@ -3,8 +3,8 @@ import * as THREE from './three.module.js';
 import { OrbitControls } from './OrbitControls.js';
 import { GLTFLoader } from './GLTFLoader.js';
 
-const rendererWidth = 256;
-const rendererHeight = 256;
+const rendererWidth = 512;
+const rendererHeight = 512;
 
 let mixer, camera, scene, renderer, clock;
 
