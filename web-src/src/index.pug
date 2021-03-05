@@ -24,7 +24,7 @@ html
             a(href='https://discord.gg/9e9ytXtsM7').mod-section-button Discord
             a(href='https://dokucraft.co.uk/').mod-section-button Dokucraft
         .section-panel
-          .column.fancy-border
+          .column.fancy-border1
             h2#mod-title
               | Custom Skins Loader 
               span#mod-version-number
@@ -43,11 +43,12 @@ html
       h2.section-title Skin Converter
       .section-body
         #upload-panel.section-panel
-          #upload-icon: include ../assets/upload.svg
-          p Drag and drop skin file to convert
-          button#upload-button: img(src=require('../assets/select_file_text.png').default)
+          .column.fancy-border2
+            #upload-icon: include ../assets/upload.svg
+            p Drag and drop skin file to convert
+            button#upload-button: img(src=require('../assets/select_file_text.png').default)
         #converter-panel.section-panel.hidden
-          #cape-converter.row.hidden
+          //-#cape-converter.row.hidden
             .column
               .original-cape-slot
                 .transparent-image-wrapper
@@ -60,8 +61,9 @@ html
                 option(value=0, selected) Cape Type 1
                 option(value=1) Cape Type 2
           #skin-converter.row
-            .column
-              .original-skin-slot
+            .column.align-flex-start
+              b Input skin
+              .converter-slot.fancy-border2
                 .transparent-image-wrapper
                   img#input-skin
               .warning-hd-required.hidden <b>High Definition Edition</b> is required to use this skin
@@ -74,11 +76,11 @@ html
                 label(for='include-animated-face') Has animated face
             .convert-skin-column.column
               .arrow-right
-            .column
-              .converted-skin-slot
+            .column.align-flex-start
+              b Dungeons skin
+              .converter-slot.fancy-border2
                 canvas#portrait-preview(width=8, height=8)
                 #model-viewer
-              span Dungeons skin
               //-select#skin-name(title='The skin texture you want to replace')
                 option(value='Alex', selected) Alex
                 option(value='Annika') Annika
@@ -179,10 +181,11 @@ html
     #usage-section.section
       h2.section-title How to use the mod
       .section-body.no-flex
+        p The mod loads skin and cape textures from a folder in your ~mods folder called "skins". Textures should be named based on what they should replace. For example, to replace the Valorie skin, name your converted skin "Valorie.png" and place it in the ~mods/skins/ folder. To find out what textures you can replace, just keep reading!
         h3 Extract default skins
-        p Extracting the default skins is the easiest way to see what you can edit using this mod. To do it, simply press Shift + F5 while in-game with the mod installed. This will create a new "skins" folder in your ~mods folder with all of the default skin and cape textures the mod supports. Using this hotkey will not overwrite any files in the skins folder, so it is safe to use without backing up your skins.
-        h3 Loading skins
-        p The mod will automatically load the skins and capes you put in your skins folder when the game starts. You can also reload the skins at any time by pressing F5 in-game.
+        p Extracting the default skins is the easiest way to see what you can edit using this mod. To do it, simply press <b>Shift + F5</b> while in-game with the mod installed. This will put all of the default skin and cape textures the mod supports in the ~mods/skins/ folder. This will not overwrite any existing files in the skins folder, so it is safe to use without backing up your skins.
+        h3 Reloading skins
+        p The mod will automatically load the skins and capes you put in your skins folder when the game starts, but you can also reload the skins at any time by pressing <b>F5</b> in-game. This is very useful if you are still editing your skin.
         h3 Dungeons skin format
         p Minecraft Dungeons uses a slightly different skin format compared to Java Edition. They may seem similar, but there are a lot of small changes to almost all parts of it. To convert a Java skin to work in Dungeons, use the Skin Converter above.
         p Java Edition has 3 different skin formats: Classic, Slim, and the old legacy format. When you upload a skin, the converter is able to automatically detect legacy skins, but for the other two, you have to select the right one. The only difference between Classic and Slim skins is the width of the arms. Classic skins have 4x4 pixel arms, while Slim has 3x4. If you're not sure which one to select, just try both and see what looks best in the 3D preview of the skin.
@@ -193,5 +196,8 @@ html
         p To have two different eye colors or 2px tall eyes requires editing the player model, which is outside the scope of this mod. If your skin needs either of those, you could ignore the animated parts (leave them transparent) and just use the normal non-animated face like in Java Edition.
         p When converting a skin with animated eyes, remember to tick the "Has animated eyes" checkbox! You can look at the 3D preview of the skin to see if the face animations are working correctly.
         h3 SkinName_S textures
-        p In Minecraft Dungeons, skins can have an extra texture that controls how shiny different parts of the skin should be. This extra texture have the suffix _S in the filename. If you're not sure what to do with it, I recommend just replacing the one for your skin with a fully black image.
+        p
+          | In Minecraft Dungeons, skins can have an extra texture that controls how shiny different parts of the skin should be. This extra texture have the suffix _S in the filename. If you're not sure what to do with it, I recommend just replacing the one for your skin with 
+          a(href=require('../assets/black.png').default, download) a fully black image
+          | .
         p These textures also control other things than just the shininess, but those are less noticeable on most skins. The red color channel is used for specularity (shininess), green is most likely used for metalness, and blue is used for emissive intensity. You can't change the emissive color using this mod, as that is controlled by the material itself and not a texture.

@@ -6,7 +6,7 @@ html
 body
   --foreground-color: #fff
   --background-color: #121110
-  --border-color: #fff8
+  --border-color: #e3d9d1
   margin: 0
   background-color: var(--background-color)
   background-image: url('../assets/block_bg.png')
@@ -17,19 +17,28 @@ body
   fill: var(--foreground-color)
   min-height: 100vh
 
-.fancy-border
+.fancy-border1
   border-width: 28px
   border-style: solid
   border-image: url('../assets/fancy_border.png') stretch
   border-image-slice: 28
 
+.fancy-border2
+  border-width: 28px
+  border-style: solid
+  border-image: url('../assets/fancy_border2.png') stretch
+  border-image-slice: 28 fill
+
+  &>*
+    z-index: 1
+
 pixel-border()
-  --border-color: #fffa
+  --border-color: #e3d9d1
   --border-top-color: var(--border-color)
   --border-right-color: var(--border-color)
   --border-bottom-color: var(--border-color)
   --border-left-color: var(--border-color)
-  --border-width: 5px
+  --border-width: 4px
   --background-color: transparent
   position: relative
 
@@ -172,11 +181,12 @@ label
   top: 50%
   transform: translateY(-50%)
 
-.original-skin-slot,
-.converted-skin-slot
-  pixel-border()
-  padding: 8px
-  margin: 5px 5px 13px 5px
+.align-flex-start
+  align-self: flex-start
+
+.converter-slot
+  margin-top: 4px
+  margin-bottom: 8px
 
 .transparent-image-wrapper
   background-image: url('../assets/transparent.png')
@@ -274,21 +284,23 @@ label
   margin-bottom: 4px
 
 #download-mod-button>button,
-#download-hd-mod-button>button
+#download-hd-mod-button>button,
+#download-skin-button
   --border-top-color: #60cf73
   --border-left-color: #377a44
   --border-bottom-color: #23582e
   --border-right-color: #377a44
   --background-color: #418c50
-  margin-top: 8px
   
   &:hover
     --border-top-color: #fff
     --border-left-color: #fff
     --border-bottom-color: #fff
     --border-right-color: #fff
-    color: #fff
-    text-shadow: 2px 2px 0px #000
+
+#download-mod-button>button,
+#download-hd-mod-button>button
+  margin-top: 8px
 
 #converter-section>.section-body
   min-height: 500px
@@ -315,7 +327,9 @@ label
 .mod-section-button
   pixel-border()
   --border-color: #1b1b1c
-  --background-color: #1b1b1c
+  --border-top-color: #363638
+  --border-bottom-color: #161617
+  --background-color: #202021
   z-index: 1
   padding: 8px 12px
   cursor: pointer
@@ -328,8 +342,9 @@ label
     margin-left: 12px
   
   &:hover
-    --border-color: #29292a
-    --background-color: #29292a
+    --border-color: #fff
+    --border-top-color: #fff
+    --border-bottom-color: #fff
 
 #model-viewer>canvas
   width: 256px !important

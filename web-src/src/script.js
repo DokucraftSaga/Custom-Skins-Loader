@@ -6,7 +6,22 @@ require('./player_model.js')
 const previewSkins = [
   require('../assets/skins/0.png').default,
   require('../assets/skins/1.png').default,
-  require('../assets/skins/2.png').default
+  require('../assets/skins/2.png').default,
+  require('../assets/skins/3.png').default,
+  require('../assets/skins/4.png').default,
+  require('../assets/skins/5.png').default,
+  require('../assets/skins/6.png').default,
+  require('../assets/skins/7.png').default,
+  require('../assets/skins/8.png').default,
+  require('../assets/skins/9.png').default,
+  require('../assets/skins/10.png').default,
+  require('../assets/skins/11.png').default,
+  require('../assets/skins/12.png').default,
+  require('../assets/skins/13.png').default,
+  require('../assets/skins/14.png').default,
+  require('../assets/skins/15.png').default,
+  require('../assets/skins/16.png').default,
+  require('../assets/skins/17.png').default
 ]
 let currentPreviewSkin = null
 
@@ -23,8 +38,8 @@ const inputSkin = document.querySelector('#input-skin')
 const skinFormat = document.querySelector('#skin-format')
 const includeAnimatedFace = document.querySelector('#include-animated-face')
 const downloadSkinButton = document.querySelector('#download-skin-button')
-const inputCape = document.querySelector('#input-cape')
-const capeTemplate = document.querySelector('#cape-template')
+//const inputCape = document.querySelector('#input-cape')
+//const capeTemplate = document.querySelector('#cape-template')
 
 let converterMode = 'skin'
 
@@ -261,7 +276,8 @@ function drawNextModPreviewSkin() {
 
     setTimeout(drawNextModPreviewSkin, 5000)
   }
-  currentPreviewSkin = previewSkins.filter(e => e != currentPreviewSkin)[Math.floor(Math.random()*(previewSkins.length-1))]
+  const potentialSkins = previewSkins.filter(e => e != currentPreviewSkin)
+  currentPreviewSkin = potentialSkins[Math.floor(Math.random()*(potentialSkins.length))]
   skin.src = currentPreviewSkin
 }
 drawNextModPreviewSkin()
@@ -283,11 +299,11 @@ inputSkin.addEventListener('load', evt => {
   convertSkin()
 })
 
-inputCape.addEventListener('load', evt => {
-  inputCape.classList.remove('hidden')
+// inputCape.addEventListener('load', evt => {
+//   inputCape.classList.remove('hidden')
 
-  //convertSkin()
-})
+//   //convertSkin()
+// })
 
 document.body.addEventListener('drop', evt => {
   evt.preventDefault()
@@ -336,52 +352,52 @@ document.querySelector('#upload-icon').addEventListener('click', evt => {
   document.querySelector('#file-input').click()
 })
 
-document.querySelector('#cape-template-scale').addEventListener('input', evt => {
-  capeTemplate.style.width = (20 + evt.target.value / 12500) + '%'
-  capeTemplate.style.top = Math.max(0, Math.min(capeTemplate.parentElement.clientHeight - capeTemplate.clientHeight, capeTemplate.offsetTop)) + 'px'
-  capeTemplate.style.left = Math.max(0, Math.min(capeTemplate.parentElement.clientWidth - capeTemplate.clientWidth, capeTemplate.offsetLeft)) + 'px'
-})
+// document.querySelector('#cape-template-scale').addEventListener('input', evt => {
+//   capeTemplate.style.width = (20 + evt.target.value / 12500) + '%'
+//   capeTemplate.style.top = Math.max(0, Math.min(capeTemplate.parentElement.clientHeight - capeTemplate.clientHeight, capeTemplate.offsetTop)) + 'px'
+//   capeTemplate.style.left = Math.max(0, Math.min(capeTemplate.parentElement.clientWidth - capeTemplate.clientWidth, capeTemplate.offsetLeft)) + 'px'
+// })
 
-function dragElement(el) {
-  let posX1 = 0, posY1 = 0, posX2 = 0, posY2 = 0;
-  el.onmousedown = dragMouseDown
+// function dragElement(el) {
+//   let posX1 = 0, posY1 = 0, posX2 = 0, posY2 = 0;
+//   el.onmousedown = dragMouseDown
 
-  function dragMouseDown(evt) {
-    evt = evt || window.event
-    evt.preventDefault()
-    posX2 = evt.clientX
-    posY2 = evt.clientY
-    document.onmouseup = closeDragElement
-    document.onmousemove = elementDrag
-  }
+//   function dragMouseDown(evt) {
+//     evt = evt || window.event
+//     evt.preventDefault()
+//     posX2 = evt.clientX
+//     posY2 = evt.clientY
+//     document.onmouseup = closeDragElement
+//     document.onmousemove = elementDrag
+//   }
 
-  function elementDrag(evt) {
-    evt = evt || window.event
-    evt.preventDefault()
-    posX1 = posX2 - evt.clientX
-    posY1 = posY2 - evt.clientY
-    posX2 = evt.clientX
-    posY2 = evt.clientY
-    el.style.top = Math.max(0, Math.min(el.parentElement.clientHeight - el.clientHeight, el.offsetTop - posY1)) + 'px'
-    el.style.left = Math.max(0, Math.min(el.parentElement.clientWidth - el.clientWidth, el.offsetLeft - posX1)) + 'px'
-  }
+//   function elementDrag(evt) {
+//     evt = evt || window.event
+//     evt.preventDefault()
+//     posX1 = posX2 - evt.clientX
+//     posY1 = posY2 - evt.clientY
+//     posX2 = evt.clientX
+//     posY2 = evt.clientY
+//     el.style.top = Math.max(0, Math.min(el.parentElement.clientHeight - el.clientHeight, el.offsetTop - posY1)) + 'px'
+//     el.style.left = Math.max(0, Math.min(el.parentElement.clientWidth - el.clientWidth, el.offsetLeft - posX1)) + 'px'
+//   }
 
-  function closeDragElement() {
-    document.onmouseup = null
-    document.onmousemove = null
-  }
-}
+//   function closeDragElement() {
+//     document.onmouseup = null
+//     document.onmousemove = null
+//   }
+// }
 
-dragElement(capeTemplate)
+// dragElement(capeTemplate)
 
-capeTemplate.addEventListener('load', evt => {
-  capeTemplate.style.top = Math.max(0, Math.min(capeTemplate.parentElement.clientHeight - capeTemplate.clientHeight, capeTemplate.offsetTop)) + 'px'
-  capeTemplate.style.left = Math.max(0, Math.min(capeTemplate.parentElement.clientWidth - capeTemplate.clientWidth, capeTemplate.offsetLeft)) + 'px'
-})
+// capeTemplate.addEventListener('load', evt => {
+//   capeTemplate.style.top = Math.max(0, Math.min(capeTemplate.parentElement.clientHeight - capeTemplate.clientHeight, capeTemplate.offsetTop)) + 'px'
+//   capeTemplate.style.left = Math.max(0, Math.min(capeTemplate.parentElement.clientWidth - capeTemplate.clientWidth, capeTemplate.offsetLeft)) + 'px'
+// })
 
-document.querySelector('#cape-template-number').addEventListener('change', evt => {
-  capeTemplate.src = capeTemplates[evt.target.value]
-})
+// document.querySelector('#cape-template-number').addEventListener('change', evt => {
+//   capeTemplate.src = capeTemplates[evt.target.value]
+// })
 
 // Browsers sometimes silently fail to autoplay muted videos. This should fix it or at least print an error/warning if it fails.
 const menuBGVideo = document.querySelector('#menu-bg')

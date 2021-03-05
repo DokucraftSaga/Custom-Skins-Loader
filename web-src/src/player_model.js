@@ -44,7 +44,7 @@ function init() {
   window.playerSkinMat = new THREE.MeshLambertMaterial({
     map: psmMap,
     skinning: true,
-    alphaTest: 0.333
+    alphaTest: 0.1
   })
   loader.load( require('../assets/player_model.glb').default, function ( gltf ) {
 
