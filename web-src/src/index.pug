@@ -10,7 +10,7 @@ html
     link(rel='icon', type='image/png', sizes='32x32', href=require('../assets/favicon-32x32.png').default)
     link(rel='icon', type='image/png', sizes='16x16', href=require('../assets/favicon-16x16.png').default)
   body
-    input#file-input.hidden(type='file')
+    input#file-input.hidden(type='file', accept='image/png')
     canvas#mod-preview-skin.hidden(width=64, height=64)
     canvas#output-skin.hidden(width=64, height=64)
     #mod-section.section
@@ -19,10 +19,18 @@ html
           video#menu-bg(src=require('../assets/menu_bg.mp4').default, autoplay, mute, loop)
           #menu-preview-model
           .mod-section-buttons-row.row
-            .mod-section-button(onclick='document.querySelector("#installation-section").scrollIntoView({block:"start",behavior:"smooth"})') Installation
-            .mod-section-button(onclick='document.querySelector("#usage-section").scrollIntoView({block:"start",behavior:"smooth"})') How to use
-            a(href='https://discord.gg/9e9ytXtsM7').mod-section-button Discord
-            a(href='https://dokucraft.co.uk/').mod-section-button Dokucraft
+            .mod-section-button(onclick='scrollIntoViewAndHighlight("#installation-section")')
+              span.icon: include ../assets/hammer-screwdriver.svg
+              | Installation
+            .mod-section-button(onclick='scrollIntoViewAndHighlight("#usage-section")')
+              span.icon: include ../assets/scroll.svg
+              | How to use
+            a(href='https://discord.gg/9e9ytXtsM7').mod-section-button
+              span.icon: include ../assets/discord.svg
+              | Discord
+            a(href='https://dokucraft.co.uk/').mod-section-button
+              span.icon: include ../assets/dokucraft.svg
+              | Dokucraft
         .section-panel
           .column.fancy-border1
             h2#mod-title
@@ -66,7 +74,6 @@ html
               .converter-slot.fancy-border2
                 .transparent-image-wrapper
                   img#input-skin
-              .warning-hd-required.hidden <b>High Definition Edition</b> is required to use this skin
               select#skin-format
                 option(value='classic', selected) Classic Java skin
                 option(value='slim') Slim Java skin
@@ -81,6 +88,7 @@ html
               .converter-slot.fancy-border2
                 canvas#portrait-preview(width=8, height=8)
                 #model-viewer
+              .warning-hd-required.hidden <b>High Definition Edition</b> is required to use this skin
               //-select#skin-name(title='The skin texture you want to replace')
                 option(value='Alex', selected) Alex
                 option(value='Annika') Annika

@@ -124,6 +124,17 @@ label
   position: relative
   padding: 0 120px
 
+@keyframes highlight
+  0%
+    background-color: #ebd193a6
+  33%
+    background-color: #ebd193a6
+  100%
+    background-color: transparent
+
+.section.highlight
+  animation: highlight 3s 1
+
 .section-title
   margin-bottom: 0px
 
@@ -200,9 +211,9 @@ label
   height: 256px
 
 .warning-hd-required
-  font-size: 0.7em
+  font-size: 0.8em
   color: #fae030
-  max-width: 270px
+  max-width: 300px
   margin: -8px 0px 8px 0px
 
 #upload-panel
@@ -342,6 +353,8 @@ label
   letter-spacing: 1px
   color: #fff !important
   text-decoration: none
+  display: flex
+  align-items: center
 
   &:not(:first-child)
     margin-left: 12px
@@ -350,6 +363,17 @@ label
     --border-color: #fff
     --border-top-color: #fff
     --border-bottom-color: #fff
+  
+  &>.icon
+    display: inline-block
+    margin-right: 8px
+    width: 18px
+    height: 18px
+
+    &>svg
+      fill: #fff !important
+      width: 18px
+      height: 18px
 
 #model-viewer>canvas
   width: 256px !important

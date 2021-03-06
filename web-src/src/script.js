@@ -310,6 +310,9 @@ document.body.addEventListener('drop', evt => {
 
   if (evt.dataTransfer.items[0].kind === 'file') {
     const file = evt.dataTransfer.items[0].getAsFile()
+    if (file.type != 'image/png') {
+      return
+    }
     if (converterMode == 'skin') {
       inputSkin.src = URL.createObjectURL(file)
     } else {
@@ -351,6 +354,13 @@ document.querySelector('#upload-button').addEventListener('click', evt => {
 document.querySelector('#upload-icon').addEventListener('click', evt => {
   document.querySelector('#file-input').click()
 })
+
+window.scrollIntoViewAndHighlight = function(id) {
+  const el = document.querySelector(id)
+  el.scrollIntoView({block: 'start', behavior: 'smooth'})
+  el.classList.add('highlight')
+  setTimeout(() => el.classList.remove('highlight'), 3000)
+}
 
 // document.querySelector('#cape-template-scale').addEventListener('input', evt => {
 //   capeTemplate.style.width = (20 + evt.target.value / 12500) + '%'
