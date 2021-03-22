@@ -426,15 +426,20 @@ menuBGVideo.oncanplaythrough = function() {
 ;(async () => {
 
   try {
-    const latestRelease = await fetch('https://api.github.com/repos/DokucraftSaga/Custom-Skins-Loader/releases/latest').then(e => e.json())
-    document.querySelector('#mod-version-number').textContent = latestRelease.tag_name
-    document.querySelector('#mod-download-count').textContent = latestRelease.assets.reduce((a, e) => a + e.download_count, 0) + ' downloads'
+    const releases = await fetch('https://api.github.com/repos/DokucraftSaga/Custom-Skins-Loader/releases').then(e => e.json())
+    document.querySelector('#mod-version-number').textContent = releases[0].tag_name
+
+    let downloadCount = 0
+    for (let release of releases) {
+      downloadCount += release.assets.reduce((a, e) => a + e.download_count, 0)
+    }
+    document.querySelector('#mod-download-count').textContent = downloadCount + ' downloads'
 
     const months = [ 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec' ]
-    const d = new Date(latestRelease.assets[0].updated_at)
+    const d = new Date(releases[0].assets[0].updated_at)
     document.querySelector('#mod-update-date').textContent = 'Updated ' + months[d.getMonth()] + ' ' + d.getDate() + ', ' + d.getFullYear()
 
-    for (let asset of latestRelease.assets) {
+    for (let asset of releases[0].assets) {
       if (asset.name == 'Custom-Skins-Loader.pak') {
         document.querySelector('#download-mod-button').href = asset.browser_download_url
       } else {
