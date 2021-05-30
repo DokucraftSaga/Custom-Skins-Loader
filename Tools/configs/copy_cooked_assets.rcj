@@ -4,3 +4,5 @@
 /XF
 SM_Tent*
 BP_MenuGameMode*
+BP_LobbyGameMode*
+BP_IngameGameMode*
