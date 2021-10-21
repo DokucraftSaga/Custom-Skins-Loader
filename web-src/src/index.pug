@@ -189,7 +189,7 @@ html
     #usage-section.section
       h2.section-title How to use the mod
       .section-body.no-flex
-        p The mod loads skin and cape textures from a folder in your ~mods folder called "skins". Textures should be named based on what they should replace. For example, to replace the Valorie skin, name your converted skin "Valorie.png" and place it in the ~mods/skins/ folder. To find out what textures you can replace, just keep reading!
+        p The mod loads skin and cape textures from a folder in your ~mods folder called "skins". Textures should be named based on what they should replace. For example, to replace the Valorie skin, name your converted skin "Valorie.png" and place it in the ~mods/skins/ folder.
         h3 Extract default skins
         p Extracting the default skins is the easiest way to see what you can edit using this mod. To do it, simply launch the game after you have installed the mod. This will automatically put all of the default skin and cape textures the mod supports in the ~mods/skins/ folder. If you delete any skins in the folder, you can also press <b>Shift + F5</b> in-game to re-export all of the textures at any time. This will not overwrite any existing files in the skins folder, so it is safe to use without backing up your skins, but if you want the default skins back, you need to move/remove the modified skins.
         h3 Reloading skins
@@ -197,6 +197,9 @@ html
         h3 Dungeons skin format
         p Minecraft Dungeons uses a slightly different skin format compared to Java Edition. They may seem similar, but there are a lot of small changes to almost all parts of it. To convert a Java skin to work in Dungeons, use the Skin Converter above.
         p Java Edition has 3 different skin formats: Classic, Slim, and the old legacy format. When you upload a skin, the converter is able to automatically detect legacy skins, but for the other two, you have to select the right one. The only difference between Classic and Slim skins is the width of the arms. Classic skins have 4x4 pixel arms, while Slim has 3x4. If you're not sure which one to select, just try both and see what looks best in the 3D preview of the skin.
+        h3 Dungeons capes
+        p Capes work just like skins in this mod. The default cape textures end up in your ~mods/skins/ folder, and you replace them the same way as skins. Dungeons capes are also in a slightly different format compared to the standard Java or Optifine capes. There isn't an automatic converter for cape textures yet, but capes are very easy to convert manually. Below is a template showing where each part of the cape goes in the texture, which you can use to draw new cape textures or convert old ones.
+        img(src=require('../assets/cape_template.png').default)
         h3 Skins with an animated face
         p The player model in Minecraft Dungeons supports face animations, however the animated parts of the face uses a part of the texture that isn't normally used in Java Edition skins. Here is an image showing where those parts are in the top left corner of the texture:
         img(src=require('../assets/animated_face_explanation.png').default)
@@ -208,6 +211,6 @@ html
           | In Minecraft Dungeons, skins can have an extra texture that controls how shiny different parts of the skin should be. This extra texture have the suffix _S in the filename. If you're not sure what to do with it, I recommend just replacing the one for your skin with 
           a(href=require('../assets/black.png').default, download) a fully black image
           | .
-        p These textures also control other things than just the shininess, but those are less noticeable on most skins. The red color channel is used for specularity (shininess), green is most likely used for metalness, and blue is used for emissive intensity. You can't change the emissive color using this mod, as that is controlled by the material itself and not a texture.
+        p These textures also control other things than just the shininess, but those are less noticeable on most skins. The red color channel is used for specularity (shininess), green is unknown, and blue is used for emissive intensity. You can't change the emissive color using this mod, as that is controlled by the material itself and not a texture.
     .footer-section
       sub Custom Skins Loader by CCCode
